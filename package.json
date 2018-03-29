@@ -7,7 +7,15 @@
   "license": "MIT",
   "repository": "github:michalochman/react-pixi-fiber",
   "typings": "./index.d.ts",
-  "files": ["LICENSE", "README.md", "index.d.ts", "index.js", "react-pixi-alias.js", "cjs/", "src/"],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.d.ts",
+    "index.js",
+    "react-pixi-alias.js",
+    "cjs/",
+    "src/"
+  ],
   "dependencies": {
     "fbjs": "^0.8.0",
     "performance-now": "^2.1.0",
@@ -65,18 +73,8 @@
     "eslint": "eslint src",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
     "prepublish": "npm run build",
-    "test": "jest"
-  },
-  "jest": {
-    "coverageDirectory": "coverage",
-    "coverageReporters": ["lcov", "text-summary"],
-    "collectCoverageFrom": ["src/**/*.js"],
-    "globals": {
-      "__DEV__": true
-    },
-    "setupFiles": ["./test/jest.setupPixi.js"],
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    }
+    "test": "npm run test:dev && npm run test:prod && node mapCoverage.js",
+    "test:dev": "jest -c config/jest.dev.json --coverage",
+    "test:prod": "jest -c config/jest.prod.json --coverage"
   }
 }

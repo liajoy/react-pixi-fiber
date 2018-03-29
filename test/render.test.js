@@ -19,26 +19,7 @@ describe("render", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
-  /*
-  export function render(element, containerTag, callback) {
-    let root = roots.get(containerTag);
-    if (!root) {
-      root = ReactPixiFiber.createContainer(containerTag);
-      roots.set(containerTag, root);
-    }
 
-    ReactPixiFiber.updateContainer(element, root, undefined, callback);
-
-    ReactPixiFiber.injectIntoDevTools({
-      findFiberByHostInstance: ReactPixiFiber.findFiberByHostInstance,
-      bundleType: __DEV__ ? 1 : 0,
-      version: pkg.version,
-      rendererPackageName: pkg.name,
-    });
-
-    return ReactPixiFiber.getPublicRootInstance(root);
-  }
-  */
   const app = new PIXI.Application();
   const callback = jest.fn();
   const root = app.stage;
@@ -66,10 +47,12 @@ describe("render", () => {
     render(element, root, callback);
 
     expect(ReactPixiFiber.injectIntoDevTools).toHaveBeenCalledTimes(1);
+
+    const bundleType = __DEV__ ? 1 : 0;
     expect(ReactPixiFiber.injectIntoDevTools).toHaveBeenCalledWith(
       expect.objectContaining({
         findFiberByHostInstance: ReactPixiFiber.findFiberByHostInstance,
-        bundleType: 1,
+        bundleType,
         version: pkg.version,
         rendererPackageName: pkg.name,
       })

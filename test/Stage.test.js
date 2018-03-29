@@ -176,11 +176,12 @@ describe("Stage", () => {
     ReactPixiFiber.injectIntoDevTools.mockClear();
     const element = renderer.create(<Stage />);
 
+    const bundleType = __DEV__ ? 1 : 0;
     expect(ReactPixiFiber.injectIntoDevTools).toHaveBeenCalledTimes(1);
     expect(ReactPixiFiber.injectIntoDevTools).toHaveBeenCalledWith(
       expect.objectContaining({
         findFiberByHostInstance: ReactPixiFiber.findFiberByHostInstance,
-        bundleType: 1,
+        bundleType,
         version: pkg.version,
         rendererPackageName: pkg.name,
       })
